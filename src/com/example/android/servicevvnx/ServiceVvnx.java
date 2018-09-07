@@ -34,19 +34,20 @@ public class ServiceVvnx extends Service {
  
     @Override
     public void onCreate() {
+		Log.d(TAG, "onCreate");
         stopSelf();
     }
     
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-		Log.d(TAG, "ServiceVvnx:  OnStartCommand");
+		Log.d(TAG, "OnStartCommand");
 		stopSelf();
 		return START_NOT_STICKY;
 	}
 
     @Override
     public void onDestroy() {		
-		Log.d(TAG, "ServiceVvnx: OnDestroy");		
+		Log.d(TAG, "OnDestroy");		
 	 }
 	 
 	  @Override
