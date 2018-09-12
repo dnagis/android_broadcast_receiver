@@ -26,6 +26,14 @@
             android:name=".ServiceVvnx"
             android:label="@string/mon_label_vvnx"
             android:process="com.example.android.servicevvnx">
+             <intent-filter>
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <category android:name="android.intent.category.DEFAULT" />
+             </intent-filter>
+             <intent-filter>
+                <action android:name="android.intent.action.DIAL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </service>
     </application>
 </manifest>

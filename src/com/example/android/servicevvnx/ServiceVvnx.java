@@ -2,6 +2,9 @@
  * Le service le plus simple au monde! Envie de voir si je peux le démarrer en ligne de commande
  * basé sur HelloActivity, et sur la classe de service Alarm dans dev../samples
  * 
+ * adb uninstall com.example.android.servicevvnx
+ * adb install out/target/product/generic_arm64/system/app/ServiceVvnx/ServiceVvnx.apk
+ * 
  * Lancement en shell avec la cmd am (activity manager), avec un intent explicite:
  * 
  * am start-service -a android.intent.action.DIAL com.example.android.servicevvnx/.ServiceVvnx
