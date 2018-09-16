@@ -19,21 +19,28 @@
      supplies a unique name for the application.  When writing your
      own application, the package name must be changed from "com.example.*"
      to come from a domain that you own or have control over. -->
+     
+
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.servicevvnx">
     
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.BATTERY_STATS"/>
-    <uses-permission android:name="android.permission.DEVICE_POWER" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     
-    <application android:label="Bidouillages intents, services, broadcast, vvnx">
+    <uses-sdk android:minSdkVersion="25" android:targetSdkVersion="26" />
+    
+    <application 
+    android:label="Bidouillages intents, services, broadcast, vvnx"
+    android:directBootAware="true">
         <service
             android:name=".ServiceVvnx"
             android:label="@string/mon_label_vvnx">
         </service>
-        <receiver android:name=".MyReceiver" >
+        <receiver android:name="MyReceiver" 
+        android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BATTERY_CHANGED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>
