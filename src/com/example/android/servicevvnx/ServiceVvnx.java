@@ -1,6 +1,7 @@
 /**
- * Le service le plus simple au monde! Envie de voir si je peux le démarrer en ligne de commande
- * basé sur HelloActivity, et sur la classe de service Alarm dans dev../samples
+ * Le service le plus simple au monde! Et BroadcastReceivers
+ * 
+ * am start-service com.example.android.servicevvnx/.ServiceVvnx
  * 
  * adb uninstall com.example.android.servicevvnx
  * adb install out/target/product/generic_arm64/system/app/ServiceVvnx/ServiceVvnx.apk
@@ -40,9 +41,15 @@ public class ServiceVvnx extends Service {
     @Override
     public void onCreate() {
 		Log.d(TAG, "onCreate");
+		
+		/*
+		 * "Context Registered Receivers", voir l'Android Dev Guide
+		 * 
+		 */
 		BroadcastReceiver br = new MyReceiver();
 		IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		this.registerReceiver(br, filter);
+				
         //stopSelf();
     }
     
