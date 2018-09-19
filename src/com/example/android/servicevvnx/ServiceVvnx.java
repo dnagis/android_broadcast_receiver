@@ -29,6 +29,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.util.Log;
 import android.os.IBinder;
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
 
 
 public class ServiceVvnx extends Service {
@@ -38,19 +40,23 @@ public class ServiceVvnx extends Service {
     @Override
     public void onCreate() {
 		Log.d(TAG, "onCreate");
-        stopSelf();
+		BroadcastReceiver br = new MyReceiver();
+		IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+		this.registerReceiver(br, filter);
+        //stopSelf();
     }
     
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d(TAG, "OnStartCommand");
-		stopSelf();
+		//stopSelf();
 		return START_NOT_STICKY;
 	}
 
     @Override
     public void onDestroy() {		
-		Log.d(TAG, "OnDestroy");		
+		Log.d(TAG, "OnDestroy");
+		stopSelf();		
 	 }
 	 
 	  @Override
