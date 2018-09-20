@@ -19,6 +19,10 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive dans MyReceiver");
+        
+        if (intent.getAction().equals(android.content.Intent.ACTION_BATTERY_CHANGED)) {
+			Log.d(TAG, "intent.getAction().equals -> test = true");
+		}
     }
 
 }
