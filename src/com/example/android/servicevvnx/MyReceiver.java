@@ -1,6 +1,5 @@
 /*
- * Basé sur samples/ShortcutSample
- * 
+ * Receiver qui récupère des intents 
  * 
  * 
  * 
@@ -20,6 +19,8 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive dans MyReceiver");
+        
+        // frameworks/base/core/java/android/os/BatteryManager.java
         
         if (intent.getAction().equals(android.content.Intent.ACTION_BATTERY_CHANGED)) {
 			final int mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 100);

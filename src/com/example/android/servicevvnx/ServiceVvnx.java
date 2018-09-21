@@ -1,7 +1,9 @@
 /**
  * Le service le plus simple au monde! 
- * BroadcastReceivers
- * Démarrage d'une fonction en shell directos sans UI
+ * 
+ * Démarrage en shell directos avec am start-service (sans UI)
+ * 
+ * Register un BroadcastReceiver dans sa fonction lancée par défaut
  * 
  * Squelette (arborescence et Android.mk) tiré de development/samples
  * make ServiceVvnx (LOCAL_PACKAGE_NAME dans le Android.mk)
@@ -58,20 +60,21 @@ public class ServiceVvnx extends Service {
 		Log.d(TAG, "onCreate");
 		
 		/*
-		 * "Context Registered Receivers", voir l'Android Dev Guide
-		 * 
+		 * "Context Registered Receivers", voir l'Android Dev Guide (manifest register suffit pas)
+		 * obligatoire pour ACTION_BATTERY_CHANGED -> frameworks/base/core/java/android/content/Intent.java
+		 * "You ****cannot**** receive this through components declared in manifests, only by explicitly registering for it with Context#registerReceiver(BroadcastReceiver, IntentFilter) Context.registerReceiver()}"
 		 */
 		BroadcastReceiver br = new MyReceiver();
 		IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		this.registerReceiver(br, filter);
 				
-        //stopSelf();
+        //stopSelf(); //j'avais mis ça juste parce que le dev guide disait qu'il fallait faire le ménage soi-même
     }
     
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.d(TAG, "OnStartCommand");
-		//stopSelf();
+		//stopSelf(); //j'avais mis ça juste parce que le dev guide disait qu'il fallait faire le ménage soi-même
 		return START_NOT_STICKY;
 	}
 
