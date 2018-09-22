@@ -34,10 +34,11 @@
     android:directBootAware="true">
         <service
             android:name=".ServiceVvnx"
-            android:label="@string/mon_label_vvnx">
+            android:label="@string/mon_label_vvnx"
+            android:exported="true">
         </service>
         <receiver android:name="MyReceiver" 
-        android:exported="false">
+        android:exported="true">
              <intent-filter>
                 <action android:name="android.intent.action.BATTERY_CHANGED" />
             </intent-filter>
