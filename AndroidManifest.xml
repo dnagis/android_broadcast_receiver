@@ -29,6 +29,8 @@
     INSTALL_FAILED_OLDER_SDK Requires newer sdk version #27 (current version is #26)] -->
     <uses-sdk android:targetSdkVersion="26" android:minSdkVersion="10"/>
     
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    
     <application 
     android:label="Bidouillages intents, services, broadcast, vvnx"
     android:directBootAware="true">
@@ -41,6 +43,10 @@
         android:exported="true">
              <intent-filter>
                 <action android:name="android.intent.action.BATTERY_CHANGED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>

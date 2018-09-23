@@ -1,42 +1,44 @@
 /**
- * Le service le plus simple au monde! 
- * 
- * Démarrage en shell directos avec am start-service (sans UI)
- * 
- * Register un BroadcastReceiver dans sa fonction lancée par défaut
- * 
- * Squelette (arborescence et Android.mk) tiré de development/samples
- * make ServiceVvnx (LOCAL_PACKAGE_NAME dans le Android.mk)
- * 
- * am start-service com.example.android.servicevvnx/.ServiceVvnx
+ * Le service le plus simple au monde! register un broadcastReceiver
+ *  
+ * Squelette (arborescence et Android.mk) tiré de development/samples/
+ * make ServiceVvnx (LOCAL_PACKAGE_NAME dans le Android.mk
  * 
  * adb uninstall com.example.android.servicevvnx
+ * 
  * 
  * adb install out/target/product/generic_arm64/system/app/ServiceVvnx/ServiceVvnx.apk
  * #ou
  * adb install out/target/product/mido/system/app/ServiceVvnx/ServiceVvnx.apk
+ *  
  * 
+ * Lancement du service en shell (nom du service: celui déclaré dans le manifest -component name-) 
+ * 
+ * #indispensable, survit au reboot (tant que tu réinstalles pas l'appli)
  * dumpsys deviceidle whitelist +com.example.android.servicevvnx
  * 
- * 
- * Lancement du service en shell (nom du service: celui déclaré dans le manifest)
- * am start-service com.example.android.servicevvnx/.ServiceVvnx
- * 
- * Lancement avec un intent explicite:
- * am start-service -a android.intent.action.DIAL com.example.android.servicevvnx/.ServiceVvnx
+ * am start-service com.example.android.servicevvnx/.ServiceVvnx  
  *  
+ * 
  * logcat -s ReceiverVvnx
  * 
- * Sans dumpsys deviceidle whitelist: le système refuse de démarrer avec les msg:
+ * 
+ * 
+
+ * 
+ * Sans dumpsys deviceidle whitelist: 
  * 		en shell:  Error: app is in background uid null
  * 		en logcat: ActivityManager: Background start not allowed: service Intent { act=android.intent.action.DIAL cmp=com.example.android.servicevvnx/.ServiceVvnx } to com.example.android.servicevvnx/.ServiceVvnx from pid=13083 uid=0 pkg=com.android.shell
  * * En greppant à partir du msg d'erreur je trouve où ça bloque:
  * 		frameworks/base/services/core/java/com/android/server/am/ActiveServices.java		--> dans la fonction ActiveServices.startServiceLocked -> li 373 qui appelle:
  * 		frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java dans getAppStartModeLocked() li 8677
  * J'ai franchement pas tout compris à ce qui se passe dans getAppStartModeLocked(), mais en lisant il y avait des mention de whitelisting de deviceidle
- * (genre + " onwhitelist=" + isOnDeviceIdleWhitelistLocked(uid));) --> du coup comme je sais faire ce whitelisting j'ai essayé et ça marche (miracle)
+ * (genre + " onwhitelist=" + isOnDeviceIdleWhitelistLocked(uid));) --> du coup comme je sais faire ce whitelisting j'ai essayé et ça marche (miracle), même sur un tel pas rooté
  * 
  * 
+ * Lancement avec un intent explicite, syntaxe:
+ * am start-service -a android.intent.action.DIAL com.example.android.servicevvnx/.ServiceVvnx
+ *
  * 
  * 
  */
@@ -57,8 +59,7 @@ public class ServiceVvnx extends Service {
  
     @Override
     public void onCreate() {
-		Log.d(TAG, "onCreate");
-		
+		Log.d(TAG, "onCreate, on va registerReceiver pour ecouter du BATTERY_CHANGED");		
 		/*
 		 * "Context Registered Receivers", voir l'Android Dev Guide (manifest register suffit pas)
 		 * obligatoire pour ACTION_BATTERY_CHANGED -> frameworks/base/core/java/android/content/Intent.java
