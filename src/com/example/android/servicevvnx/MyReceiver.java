@@ -31,9 +31,16 @@ public class MyReceiver extends BroadcastReceiver {
         
              
         if (intent.getAction().equals(android.content.Intent.ACTION_BOOT_COMPLETED)) {
-			Log.d(TAG, "intent boot received");			
+			Log.d(TAG, "intent boot received");	
+			
 			Intent i = new Intent(context, ServiceVvnx.class);
 			context.startService(i);
+			
+			/** Pas possible car au runtime: 
+			 * Unable to start receiver com.example.android.servicevvnx.MyReceiver: android.content.ReceiverCallNotAllowedException: BroadcastReceiver components are not allowed to register to receive intents
+			*BroadcastReceiver br = new MyReceiver();
+			IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+			context.registerReceiver(br, filter);*/
 		}
         
         // frameworks/base/core/java/android/os/BatteryManager.java        
