@@ -27,7 +27,7 @@ public class MyReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "onReceive dans MyReceiver, action = " + intent.getAction());
+        Log.d(TAG, "onReceive dans MyReceiver, action=" + intent.getAction());
         
              
         if (intent.getAction().equals(android.content.Intent.ACTION_BOOT_COMPLETED)) {
