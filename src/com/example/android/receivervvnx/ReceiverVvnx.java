@@ -12,7 +12,7 @@
  * du coup j'appelle le service, et dans le onCreate() de ce service il y a registerReceiver.
  */ 
 
-package com.example.android.servicevvnx;
+package com.example.android.receivervvnx;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -22,12 +22,12 @@ import android.content.Intent;
 import android.util.Log;
 import android.os.BatteryManager;
 
-public class MyReceiver extends BroadcastReceiver {
+public class ReceiverVvnx extends BroadcastReceiver {
     private static final String TAG = "ReceiverVvnx";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "onReceive dans MyReceiver, action=" + intent.getAction());
+        Log.d(TAG, "onReceive dans mon Receiver, action=" + intent.getAction());
         
              
         if (intent.getAction().equals(android.content.Intent.ACTION_BOOT_COMPLETED)) {
@@ -37,7 +37,7 @@ public class MyReceiver extends BroadcastReceiver {
 			context.startService(i);
 			
 			/** Pas possible car au runtime: 
-			 * Unable to start receiver com.example.android.servicevvnx.MyReceiver: android.content.ReceiverCallNotAllowedException: BroadcastReceiver components are not allowed to register to receive intents
+			 * Unable to start receiver com.example.android....: android.content.ReceiverCallNotAllowedException: BroadcastReceiver components are not allowed to register to receive intents
 			*BroadcastReceiver br = new MyReceiver();
 			IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 			context.registerReceiver(br, filter);*/

@@ -4,20 +4,19 @@
  * Squelette (arborescence et Android.mk) tiré de development/samples/
  * make ServiceVvnx (LOCAL_PACKAGE_NAME dans le Android.mk
  * 
- * adb uninstall com.example.android.servicevvnx
+ * adb uninstall com.example.android.receivervvnx
  * 
  * 
- * adb install out/target/product/generic_arm64/system/app/ServiceVvnx/ServiceVvnx.apk
- * #ou
- * adb install out/target/product/mido/system/app/ServiceVvnx/ServiceVvnx.apk
- *  
+ * adb install out/target/product/mido/system/app/ReceiverVvnx/ReceiverVvnx.apk
+ * ou
+ * adb install out/target/product/generic_arm64/system/app/ReceiverVvnx/ReceiverVvnx.apk
  * 
  * Lancement du service en shell (nom du service: celui déclaré dans le manifest -component name-) 
  * 
  * #indispensable, survit au reboot (tant que tu réinstalles pas l'appli)
- * dumpsys deviceidle whitelist +com.example.android.servicevvnx
+ * dumpsys deviceidle whitelist +com.example.android.receivervvnx
  * 
- * am start-service com.example.android.servicevvnx/.ServiceVvnx  
+ * am start-service com.example.android.receivervvnx/.ServiceVvnx  
  *  
  * 
  * logcat -s ReceiverVvnx
@@ -37,13 +36,13 @@
  * 
  * 
  * Lancement avec un intent explicite, syntaxe:
- * am start-service -a android.intent.action.DIAL com.example.android.servicevvnx/.ServiceVvnx
+ * am start-service -a android.intent.action.DIAL com.example.android.receivervvnx/.ReceiverVvnx
  *
  * 
  * 
  */
 
-package com.example.android.servicevvnx;
+package com.example.android.receivervvnx;
 
 import android.app.Service;
 import android.content.Intent;
@@ -65,7 +64,7 @@ public class ServiceVvnx extends Service {
 		 * obligatoire pour ACTION_BATTERY_CHANGED -> frameworks/base/core/java/android/content/Intent.java
 		 * "You ****cannot**** receive this through components declared in manifests, only by explicitly registering for it with Context#registerReceiver(BroadcastReceiver, IntentFilter) Context.registerReceiver()}"
 		 */
-		BroadcastReceiver br = new MyReceiver();
+		BroadcastReceiver br = new ReceiverVvnx();
 		IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		this.registerReceiver(br, filter);
 				

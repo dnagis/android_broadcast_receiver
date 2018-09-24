@@ -23,7 +23,7 @@
 
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.servicevvnx">
+    package="com.example.android.receivervvnx">
     
     <!-- si je mets rien il target 27 et ca plante à l'install sur le moto X non rooté 
     INSTALL_FAILED_OLDER_SDK Requires newer sdk version #27 (current version is #26)] -->
@@ -39,7 +39,7 @@
             android:label="@string/mon_label_vvnx"
             android:exported="true">
         </service>
-        <receiver android:name="MyReceiver" 
+        <receiver android:name="ReceiverVvnx" 
         android:exported="true">
              <intent-filter>
                 <action android:name="android.intent.action.BATTERY_CHANGED" />
