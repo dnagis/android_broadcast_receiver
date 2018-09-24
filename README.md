@@ -3,7 +3,10 @@
 ## Service - ServiceVvnx
 
 Indispensable pour lancer la première fois l'appli (démarrage intent BOOT_COMPLETED -> l'appli doit avoir été lancée au moins
-une fois)
+une fois).
+Le lancement du service 
+	-> dumpsys deviceidle whitelist +com.example.android.servicevvnx (voir le .java pour détails du pourquoi)
+	-> am start-service com.example.android.servicevvnx/.ServiceVvnx
 
 
 ## BroadcastReceiver - MyReceiver
