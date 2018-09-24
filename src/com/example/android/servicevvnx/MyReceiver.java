@@ -46,7 +46,7 @@ public class MyReceiver extends BroadcastReceiver {
         // frameworks/base/core/java/android/os/BatteryManager.java        
         if (intent.getAction().equals(android.content.Intent.ACTION_BATTERY_CHANGED)) {
 			final int mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 100);
-			Log.d(TAG, "intent battery_changed: level: " + mBatteryLevel);
+			Log.d(TAG, "intent battery_changed - level: " + mBatteryLevel);
 		}
     }
 
