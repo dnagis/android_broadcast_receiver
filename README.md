@@ -2,14 +2,16 @@
 
 ## Service - ServiceVvnx
 
-Indispensable pour lancer la première fois l'appli (démarrage intent BOOT_COMPLETED -> l'appli doit avoir été lancée au moins
+Indispensable pour lancer la première fois l'appli (pour un démarrage par intent BOOT_COMPLETED -> l'appli doit avoir été lancée au moins
 une fois).
 Le lancement du service 
-	-> dumpsys deviceidle whitelist +com.example.android.servicevvnx (voir le .java pour détails du pourquoi)
-	-> am start-service com.example.android.servicevvnx/.ServiceVvnx
+	-> dumpsys deviceidle whitelist +com.example.android.receivervvnx (voir le .java pour détails du pourquoi)
+	-> am start-service com.example.android.receivervvnx/.ServiceVvnx
+	
+Arrêter le service
+	-> am force-stop com.example.android.receivervvnx
 
-
-## BroadcastReceiver - MyReceiver
+## BroadcastReceiver - ReceiverVvnx
 
 2 receivers: BOOT_COMPLETED et BATTERY_CHANGED
 nb: le BOOT_COMPLETED peut se contenter d'être registeré dans le manifest
@@ -19,16 +21,18 @@ ce que je fais dans le service. (registerReceiver)
 
 ## Les commandes:
 
-adb uninstall com.example.android.servicevvnx
+make ReceiverVvnx
 
-adb install out/target/product/generic_arm64/system/app/ServiceVvnx/ServiceVvnx.apk
-ou
-adb install out/target/product/mido/system/app/ServiceVvnx/ServiceVvnx.apk
+adb uninstall com.example.android.receivervvnx
 
-dumpsys deviceidle whitelist +com.example.android.servicevvnx
+adb install out/target/product/mido/system/app/ReceiverVvnx/ReceiverVvnx.apk
+#ou
+adb install out/target/product/generic_arm64/system/app/ReceiverVvnx/ReceiverVvnx.apk
 
-am start-service com.example.android.servicevvnx/.ServiceVvnx
+dumpsys deviceidle whitelist +com.example.android.receivervvnx
+
+am start-service com.example.android.receivervvnx/.ServiceVvnx
 
 logcat -s ReceiverVvnx
 
-am force-stop com.example.android.servicevvnx
+am force-stop com.example.android.receivervvnx
