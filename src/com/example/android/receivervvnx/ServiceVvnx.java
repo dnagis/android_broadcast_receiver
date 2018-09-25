@@ -50,6 +50,7 @@ import android.util.Log;
 import android.os.IBinder;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
+import android.database.sqlite.SQLiteDatabase;
 
 
 public class ServiceVvnx extends Service {
@@ -58,7 +59,7 @@ public class ServiceVvnx extends Service {
  
     @Override
     public void onCreate() {
-		Log.d(TAG, "onCreate, on va registerReceiver pour ecouter du BATTERY_CHANGED");		
+		Log.d(TAG, "onCreate");		
 		/*
 		 * "Context Registered Receivers", voir l'Android Dev Guide (manifest register suffit pas)
 		 * obligatoire pour ACTION_BATTERY_CHANGED -> frameworks/base/core/java/android/content/Intent.java
@@ -67,6 +68,10 @@ public class ServiceVvnx extends Service {
 		BroadcastReceiver br = new ReceiverVvnx();
 		IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
 		this.registerReceiver(br, filter);
+		
+		// /data/data/com.example.android.receivervvnx/databases
+		BaseDeDonnees maBDD = new BaseDeDonnees(this); //pas suffisant pour passer dans le onCreate() de BaseDeDonnees
+		SQLiteDatabase bdd=maBDD.getWritableDatabase(); //avec ça on passe dans le onCreate()
 				
         //stopSelf(); //j'avais mis ça juste parce que le dev guide disait qu'il fallait faire le ménage soi-même
     }
