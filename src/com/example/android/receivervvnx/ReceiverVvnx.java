@@ -21,6 +21,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.os.BatteryManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 
 public class ReceiverVvnx extends BroadcastReceiver {
     private static final String TAG = "ReceiverVvnx";
@@ -47,6 +50,20 @@ public class ReceiverVvnx extends BroadcastReceiver {
         if (intent.getAction().equals(android.content.Intent.ACTION_BATTERY_CHANGED)) {
 			final int mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 100);
 			Log.d(TAG, "intent battery_changed - level: " + mBatteryLevel);
+			
+			/*
+			 * SQL
+			 * adb pull /data/data/com.example.android.receivervvnx/databases/log_intents.db
+			 *  
+			 */ 
+			
+			BaseDeDonnees maBDD = new BaseDeDonnees(context); //pas suffisant pour passer dans le onCreate() de BaseDeDonnees
+			SQLiteDatabase bdd=maBDD.getWritableDatabase(); //avec ça on passe dans le onCreate()
+			ContentValues values = new ContentValues();
+			long timestamp = System.currentTimeMillis();
+			values.put("TIME", timestamp);
+            values.put("BATT", mBatteryLevel);
+            bdd.insert("batterie", null, values);
 		}
     }
 

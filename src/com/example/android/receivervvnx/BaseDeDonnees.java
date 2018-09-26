@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /*
- * la bdd atterit ici:
- * /data/data/com.example.android.receivervvnx/databases/log_intents.db
+ * récup bdd sqlite
+ * adb pull /data/data/com.example.android.receivervvnx/databases/log_intents.db
  * 
  */ 
 
