@@ -6,8 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /*
- * récup bdd sqlite (sur tel rooté)
+ * récup bdd sqlite (sur tel rooté et sur tel production build)
  * adb pull /data/data/com.example.android.receivervvnx/databases/log_intents.db
+ * adb shell 'run-as com.example.android.receivervvnx cat /data/data/com.example.android.receivervvnx/databases/log_intents.db' > ma.db
  * SELECT datetime(TIME/1000, 'unixepoch', 'localtime'), BATT FROM batterie;
  * 
  */ 
