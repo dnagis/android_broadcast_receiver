@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.os.BatteryManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 
@@ -57,13 +58,24 @@ public class ReceiverVvnx extends BroadcastReceiver {
 			 *  
 			 */ 
 			
-			BaseDeDonnees maBDD = new BaseDeDonnees(context); //pas suffisant pour passer dans le onCreate() de BaseDeDonnees
-			SQLiteDatabase bdd=maBDD.getWritableDatabase(); //avec ça on passe dans le onCreate()
-			ContentValues values = new ContentValues();
+			ContentValues values = new ContentValues();			
 			long timestamp = System.currentTimeMillis();
 			values.put("TIME", timestamp);
-            values.put("BATT", mBatteryLevel);
+            values.put("BATT", mBatteryLevel);			
+			
+			
+			try
+			{
+			BaseDeDonnees maBDD = new BaseDeDonnees(context); //pas suffisant pour passer dans le onCreate() de BaseDeDonnees
+			SQLiteDatabase bdd=maBDD.getWritableDatabase(); //avec ça on passe dans le onCreate()
             bdd.insert("batterie", null, values);
+			} 
+			catch(SQLiteCantOpenDatabaseException e) //j'ai eu des arrêts avec android.database.sqlite.SQLiteCantOpenDatabaseException: unable to open database file (code 14)
+			{
+			Log.d(TAG, "erreur SQLiteCantOpenDatabaseException");	 
+			}
+            
+            
 		}
     }
 
