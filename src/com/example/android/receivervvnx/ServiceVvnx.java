@@ -51,6 +51,8 @@ import android.os.IBinder;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 
+import android.bluetooth.BluetoothDevice;
+
 
 
 public class ServiceVvnx extends Service {
@@ -66,7 +68,8 @@ public class ServiceVvnx extends Service {
 		 * "You ****cannot**** receive this through components declared in manifests, only by explicitly registering for it with Context#registerReceiver(BroadcastReceiver, IntentFilter) Context.registerReceiver()}"
 		 */
 		BroadcastReceiver br = new ReceiverVvnx();
-		IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+		//IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+		IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
 		this.registerReceiver(br, filter);
 				
         //stopSelf(); //j'avais mis ça juste parce que le dev guide disait qu'il fallait faire le ménage soi-même

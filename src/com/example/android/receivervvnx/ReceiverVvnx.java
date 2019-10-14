@@ -26,12 +26,19 @@ import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 
+import android.bluetooth.BluetoothDevice;
+
 public class ReceiverVvnx extends BroadcastReceiver {
     private static final String TAG = "ReceiverVvnx";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive dans mon Receiver, action=" + intent.getAction());
+        
+        if (intent.getAction().equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
+			Log.d(TAG, "intent bond state changed received");	
+			
+		}
         
              
         if (intent.getAction().equals(android.content.Intent.ACTION_BOOT_COMPLETED)) {

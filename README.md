@@ -13,10 +13,14 @@ Arrêter le service
 
 ## BroadcastReceiver - ReceiverVvnx
 
-2 receivers: BOOT_COMPLETED et BATTERY_CHANGED
-nb: le BOOT_COMPLETED peut se contenter d'être registeré dans le manifest
-mais pour BATTERY_CHANGED, depuis OREO et la chasse aux sorcières du background: il faut registerer le receiver dans le code,
-ce que je fais dans le service. (registerReceiver)
+3 receivers: BOOT_COMPLETED BATTERY_CHANGED BOND_STATE_CHANGED (bluetooth)
+
+receivers can be Manifest-declared and/or Context-registered (calling this.registerReceiver(br, filter);)
+see https://developer.android.com/guide/components/broadcasts
+
+BOOT_COMPLETED 			can be manifest-declared only
+BATTERY_CHANGED 		depuis OREO et la chasse aux sorcières du background: Context-registering mandatory
+BOND_STATE_CHANGED		context-registering only works
 
 
 ## Les commandes:
